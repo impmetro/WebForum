@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebForum</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Firebase SDKs (compat for simpler ES2015 usage) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <h1 class="logo"><a href="#">WebForum</a></h1>
+      <nav class="nav" id="nav">
+        <span id="userInfo" class="user-info"></span>
+        <button id="btnLogin" class="btn btn-outline">Login</button>
+        <button id="btnRegister" class="btn btn-primary">Register</button>
+        <button id="btnLogout" class="btn btn-outline hidden">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <h2 id="authTitle">Login</h2>
+        <form id="authForm">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Your username" autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password (min 6 chars)" required minlength="6" autocomplete="current-password">
+          </div>
+          <p id="authError" class="error"></p>
+          <button type="submit" class="btn btn-primary btn-block" id="authSubmit">Login</button>
+        </form>
+        <p class="auth-switch">
+          <span id="switchText">Don't have an account?</span>
+          <a href="#" id="switchMode">Register</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Breadcrumb / Navigation -->
+    <div id="breadcrumb" class="breadcrumb"></div>
+
+    <!-- Views -->
+    <section id="viewCategories" class="view">
+      <h2>Categories</h2>
+      <div id="categoriesList" class="card-list"></div>
+    </section>
+
+    <section id="viewForums" class="view hidden">
+      <h2 id="forumsTitle">Forums</h2>
+      <div id="forumsList" class="card-list"></div>
+    </section>
+
+    <section id="viewPosts" class="view hidden">
+      <div class="posts-header">
+        <h2 id="postsTitle">Posts</h2>
+        <button id="btnNewPost" class="btn btn-primary hidden">New Post</button>
+      </div>
+      <div id="newPostForm" class="card hidden">
+        <h3>Create New Post</h3>
+        <form id="postForm">
+          <div class="form-group">
+            <label for="postTitle">Title</label>
+            <input type="text" id="postTitle" required maxlength="120">
+          </div>
+          <div class="form-group">
+            <label for="postContent">Content</label>
+            <textarea id="postContent" rows="6" required></textarea>
+          </div>
+          <p id="postError" class="error"></p>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Publish</button>
+            <button type="button" class="btn btn-outline" id="btnCancelPost">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <div id="postsList" class="posts-list"></div>
+    </section>
+
+    <section id="viewPostDetail" class="view hidden">
+      <article id="postDetail" class="post-detail card"></article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 WebForum — Built with Firebase</p>
+    </div>
+  </footer>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
